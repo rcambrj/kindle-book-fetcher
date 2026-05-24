@@ -1,8 +1,7 @@
 # Book Fetcher
 
-KUAL extension for a jailbroken Kindle Paperwhite 1st gen. It manually fetches
-ebook files from a simple HTTP directory listing and saves them to the Kindle
-documents folder.
+KUAL extension for a jailbroken Kindle. It manually fetches ebook files from a
+simple HTTP directory listing and saves them to the Kindle documents folder.
 
 Supported file extensions:
 
@@ -24,6 +23,48 @@ Books are downloaded to the `documents` directory.
 
 The script writes logs to stderr, `extensions/book-fetcher/fetch-books.log`, and a compact on-screen `eips` viewport when available.
 
+## Configuration
+
+Create `extensions/book-fetcher/settings.sh` on the Kindle, next to `fetch-books.sh`:
+
+```sh
+# Mandatory. Use a trailing slash. Don't use HTTPS
+BASE_URL="http://my-website.com/kindle-books/"
+# Optional. Where the books will be downloaded. `/mnt/us` is the root which you see over USB
+DOWNLOAD_DIR="/mnt/us/documents"
+# Optional. Defaults to the directory containing fetch-books.sh.
+LOG_FILE="/mnt/us/extensions/book-fetcher/fetch-books.log"
+# Optional. Screen log settings.
+SHOW_SCREEN=1
+EIPS_LOG_COL=5
+EIPS_LOG_ROW=15
+EIPS_LOG_COLS=38
+EIPS_LOG_ROWS=11
+```
+
+The script logs to screen and to `fetch-books.log`.
+
+## Filename Rules
+
+Keep server filenames simple:
+
+- Use ASCII names.
+- Prefer letters, numbers, dots, dashes, and underscores.
+- Avoid nested directories.
+- Avoid query-string links or custom index pages.
+
+### Hosting Suggestions
+
+You could host a web page with nginx, Apache or similar on your own computer, or you could use a hosting providers. Here's a list of hosting providers which should allow directory listing (enabling the web page which lists all the files in a directory):
+
+- [NearlyFreeSpeech.NET](https://www.nearlyfreespeech.net/)
+- [HelioHost](https://heliohost.org/)
+- [Freehosting.host](https://freehosting.host/)
+- [InfinityFree](https://www.infinityfree.com/)
+- [x10Hosting](https://x10hosting.com/)
+- [AwardSpace](https://www.awardspace.com/)
+- [ProFreeHost](https://profreehost.com/)
+
 ## Server Setup
 
 The server only needs a normal HTTP directory listing.
@@ -39,43 +80,3 @@ Nginx example:
 ```nginx
 autoindex on;
 ```
-
-## Configuration
-
-Create `extensions/book-fetcher/settings.sh` on the Kindle, next to `fetch-books.sh`:
-
-```sh
-# Mandatory. Use a trailing slash.
-BASE_URL="http://my-website.com/kindle-books/"
-# Optional. Where the books will be downloaded. `/mnt/us` is the root which you see over USB
-DOWNLOAD_DIR="/mnt/us/documents"
-# Optional. Defaults to the directory containing fetch-books.sh.
-LOG_FILE="/mnt/us/extensions/book-fetcher/fetch-books.log"
-# Optional. Screen log settings.
-SHOW_SCREEN=1
-EIPS_LOG_COL=5
-EIPS_LOG_ROW=15
-EIPS_LOG_COLS=38
-EIPS_LOG_ROWS=11
-```
-
-`settings.sh` is intentionally not included so local Kindle-specific settings do not need to be tracked.
-
-The on-screen log uses the vertical middle third and the full safe text width centered for a Paperwhite 1. Full details go to stderr and remain in `fetch-books.log`.
-
-## Filename Rules
-
-Keep server filenames simple:
-
-- Use ASCII names.
-- Prefer letters, numbers, dots, dashes, and underscores.
-- Avoid nested directories.
-- Avoid query-string links or custom index pages.
-
-The script decodes a few common URL escapes for local filenames, including `%20`, `%28`, `%29`, `%5B`, `%5D`, `%2C`, and `%27`.
-
-## Why Not Recursive Wget?
-
-Kindles commonly ship BusyBox `wget`, not GNU Wget. BusyBox `wget` is enough for direct downloads but does not reliably support GNU recursive options like `-r`, `-l`, `-A`, or `-nd`.
-
-This extension fetches the generated directory listing, extracts matching ebook links, and downloads each file directly.
