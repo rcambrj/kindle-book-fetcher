@@ -1,11 +1,11 @@
 {
   "items": [
     {
-      "name": "Kindle Fetcher",
+      "name": "Book Fetcher",
       "priority": 0,
       "items": [
         {
-          "name": "Fetch Books",
+          "name": "Fetch books",
           "action": "./fetch-books.sh",
           "exitmenu": false,
           "status": false,

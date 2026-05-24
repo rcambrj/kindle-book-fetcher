@@ -1,4 +1,4 @@
-# Kindle Fetcher
+# Book Fetcher
 
 KUAL extension for a jailbroken Kindle Paperwhite 1st gen. It manually fetches
 ebook files from a simple HTTP directory listing and saves them to the Kindle
@@ -17,12 +17,12 @@ Copy the `extensions` directory to the Kindle over USB:
 Open KUAL and choose:
 
 ```text
-Kindle Fetcher -> Fetch Books
+Book Fetcher -> Fetch books
 ```
 
 Books are downloaded to the `documents` directory.
 
-The script writes logs to stderr, `extensions/kindle-fetcher/fetch-books.log`, and a compact on-screen `eips` viewport when available.
+The script writes logs to stderr, `extensions/book-fetcher/fetch-books.log`, and a compact on-screen `eips` viewport when available.
 
 ## Server Setup
 
@@ -42,16 +42,16 @@ autoindex on;
 
 ## Configuration
 
-Create `extensions/kindle-fetcher/settings.sh` on the Kindle, next to `fetch-books.sh`:
+Create `extensions/book-fetcher/settings.sh` on the Kindle, next to `fetch-books.sh`:
 
 ```sh
-# Use a trailing slash. Directory listings rely on relative links resolving against the directory URL.
-BASE_URL="http://192.168.1.10:8000/kindle/"
-# /mnt/us is the root which you see over USB
+# Mandatory. Use a trailing slash.
+BASE_URL="http://my-website.com/kindle-books/"
+# Optional. Where the books will be downloaded. `/mnt/us` is the root which you see over USB
 DOWNLOAD_DIR="/mnt/us/documents"
 # Optional. Defaults to the directory containing fetch-books.sh.
-LOG_FILE="/mnt/us/extensions/kindle-fetcher/fetch-books.log"
-# Optional screen log settings. Set SHOW_SCREEN=0 to disable eips output.
+LOG_FILE="/mnt/us/extensions/book-fetcher/fetch-books.log"
+# Optional. Screen log settings.
 SHOW_SCREEN=1
 EIPS_LOG_COL=5
 EIPS_LOG_ROW=15

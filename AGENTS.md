@@ -16,7 +16,7 @@ Provide a minimal KUAL extension that lets a user manually fetch ebooks from a k
 The extension is installed at:
 
 ```text
-/mnt/us/extensions/kindle-fetcher
+/mnt/us/extensions/book-fetcher
 ```
 
 Required KUAL files:
@@ -80,7 +80,7 @@ Rejected links:
 The script logs to:
 
 ```text
-/mnt/us/extensions/kindle-fetcher/fetch-books.log
+/mnt/us/extensions/book-fetcher/fetch-books.log
 ```
 
 If `eips` exists, the script also writes short status messages to the Kindle screen.

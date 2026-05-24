@@ -1,9 +1,9 @@
 #!/bin/sh
 
-BASE_URL="http://192.168.1.10:8000/kindle/"
+BASE_URL="http://127.0.0.1:8000/kindle/"
 DOWNLOAD_DIR="/mnt/us/documents"
-INDEX_FILE="/tmp/kindle-fetcher-index.html"
-LINKS_FILE="/tmp/kindle-fetcher-links.txt"
+INDEX_FILE="/tmp/book-fetcher-index.html"
+LINKS_FILE="/tmp/book-fetcher-links.txt"
 SHOW_SCREEN=1
 EIPS_LOG_COL=5
 EIPS_LOG_ROW=15

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension>
     <information>
-        <name>Kindle Fetcher</name>
+        <name>Book Fetcher</name>
         <version>0.1.0</version>
-        <author>kindle-fetcher</author>
-        <id>kindle-fetcher</id>
+        <author>rcambrj</author>
+        <id>book-fetcher</id>
     </information>
     <menus>
         <menu type="json" dynamic="true">menu.json</menu>
