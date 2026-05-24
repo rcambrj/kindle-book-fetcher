@@ -54,7 +54,7 @@ LOG_FILE="/mnt/us/extensions/kindle-fetcher/fetch-books.log"
 # Optional screen log settings. Set SHOW_SCREEN=0 to disable eips output.
 SHOW_SCREEN=1
 EIPS_LOG_COL=5
-EIPS_LOG_ROW=11
+EIPS_LOG_ROW=15
 EIPS_LOG_COLS=38
 EIPS_LOG_ROWS=11
 ```

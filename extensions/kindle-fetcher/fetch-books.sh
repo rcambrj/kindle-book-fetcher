@@ -6,7 +6,7 @@ INDEX_FILE="/tmp/kindle-fetcher-index.html"
 LINKS_FILE="/tmp/kindle-fetcher-links.txt"
 SHOW_SCREEN=1
 EIPS_LOG_COL=5
-EIPS_LOG_ROW=11
+EIPS_LOG_ROW=15
 EIPS_LOG_COLS=38
 EIPS_LOG_ROWS=11
 EIPS_LOG_LINE=0
@@ -34,16 +34,15 @@ log_msg() {
 
 screen_log() {
     [ "$SHOW_SCREEN" = "1" ] || return 0
-    if command -v eips >/dev/null 2>&1; then
-        message="$1"
-        row=$((EIPS_LOG_ROW + EIPS_LOG_LINE))
-        message=$(printf '%s' "$message" | cut -c1-"$EIPS_LOG_COLS")
-        eips "$EIPS_LOG_COL" "$row" "$EIPS_CLEAR_TEXT" >/dev/null 2>&1
-        eips "$EIPS_LOG_COL" "$row" "$message" >/dev/null 2>&1
-        EIPS_LOG_LINE=$((EIPS_LOG_LINE + 1))
-        if [ "$EIPS_LOG_LINE" -ge "$EIPS_LOG_ROWS" ]; then
-            EIPS_LOG_LINE=0
-        fi
+    message="$1"
+    row=$((EIPS_LOG_ROW + EIPS_LOG_LINE))
+
+    eips "$EIPS_LOG_COL" "$row" "$EIPS_CLEAR_TEXT" 2>>"$LOG_FILE"
+    eips "$EIPS_LOG_COL" "$row" "$message" 2>>"$LOG_FILE"
+
+    EIPS_LOG_LINE=$((EIPS_LOG_LINE + 1))
+    if [ "$EIPS_LOG_LINE" -ge "$EIPS_LOG_ROWS" ]; then
+        EIPS_LOG_LINE=0
     fi
 }
 
