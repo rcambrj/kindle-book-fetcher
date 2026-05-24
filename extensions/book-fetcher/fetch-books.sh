@@ -128,7 +128,7 @@ if command -v lipc-set-prop >/dev/null 2>&1; then
     lipc-set-prop -- com.lab126.scanner doFullScan 1 >/dev/null 2>&1
     log_msg "Requested document rescan"
 else
-    log_msg "lipc-set-prop unavailable; rescan skipped"
+    log_msg "Document rescan skipped"
 fi
 
 log_msg "Done: $downloaded downloaded, $skipped skipped"
